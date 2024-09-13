@@ -6,17 +6,35 @@ function CreateArea() {
     title: "",
     content: "",
   });
+  function handelChange(event) {
+    const { name, value } = event.target;
+    setNote((prevNote) => {
+      return {
+        ...prevNote,
+        [name]: value,
+      };
+    });
+  }
+  function submitClick(event) {
+    event.preventDefault();
+  }
   return (
     <div>
       <form>
-        <input name="title" value={note.title} placeholder="Title" />
+        <input
+          onChange={handelChange}
+          name="title"
+          value={note.title}
+          placeholder="Title"
+        />
         <textarea
+          onChange={handelChange}
           name="content"
           value={note.content}
           placeholder="Take a note..."
           rows="3"
         />
-        <button>Add</button>
+        <button onClick={submitClick}>Add</button>
       </form>
     </div>
   );
